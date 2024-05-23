@@ -31,8 +31,4 @@ namespace :deploy do
   task :restart do
     invoke 'unicorn:restart'
   end
-
-  after :publishing, :restart
-
-  before 'deploy:updated', 'assets:precompile'
 end

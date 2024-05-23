@@ -1,0 +1,117 @@
+/* @import url('https://fonts.googleapis.com/css?family=Sacramento');
+@import url('https://fonts.googleapis.com/css?family=Sawarabi+Mincho'); */
+
+
+body {
+    font-family: "Helvetica Neue",
+      Arial,
+      "Hiragino Kaku Gothic ProN",
+      "Hiragino Sans",
+      Meiryo,
+      sans-serif;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+video {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color:black;
+}
+
+header {
+    width: 100vw;
+    height: 100px;
+    position: fixed;
+    top:0;
+    z-index: 1;
+    background-color: rgba(71, 71, 71, 0.5);
+}
+
+.header-logo {
+    font-family: 'Sacramento', cursive;
+    font-size:60px;
+    margin: 10px 0 0 40px;
+    font-weight: bold;
+}
+
+.header-logo a {
+    color:aliceblue;
+}
+
+main {
+    width: 100vw;
+}
+
+.top-page {
+    display: flex;
+    position: relative;
+}
+
+.main-video {
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.95;
+}
+
+.top-page .signup-form {
+    position: absolute;
+    top: 130px;
+    right: 60px;
+    padding: 40px 30px;
+}
+
+.signup-form {
+    background-color: #3f3f3f;
+    opacity: 0.9;
+    width: 350px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.signup-form h2 {
+    font-size: 45px;
+    font-family: 'Sawarabi Mincho', sans-serif;
+    margin-bottom: 10px;
+}
+
+.signup-form label {
+    font-family: 'Sawarabi Mincho', sans-serif;
+}
+
+
+#submit-btn {
+    width: 150px;
+    height: 40px;
+    font-family: 'Sawarabi Mincho', sans-serif;
+    margin-top: 20px;
+    cursor:pointer;
+}
+
+footer {
+    width: 100vw;
+    height: 70px;
+    background-color: rgba(71, 71, 71, 0.3);
+    opacity: 0.9;
+    margin-top: auto;
+}
+
+footer .footer-list {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+
+footer .copy-light {
+    font-size: 10px;
+    text-align: center;
+}

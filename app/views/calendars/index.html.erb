@@ -1,0 +1,50 @@
+<body class="first">
+  
+  <%= render "shared/header" %>
+  <main class="top-view">
+    <% if user_signed_in? %>
+    <div class="main-visual top-content">
+      <h2>Hello Boss</h2>
+      <h2 class="times" >本日は<%= @year_time %>年<%= @month_time %>月<%= @date_time %>日です。</h2>
+      <p>すてきな１日を</p>
+      <%= link_to "マイページ", user_path(current_user.id), class: "my-page-btn"%>
+    </div>
+
+    <% else %>
+    
+    <div class="first-view">
+      <div class="first-image">
+        <%= image_tag "design.png" %>
+      </div>
+      <div class="first-logo">
+        <h2>あなたの毎日を足跡に</h2>
+        <ul>
+          <li>テキスト</li>
+          <li>テキスト</li>
+          <li>テキスト</li>
+        </ul>
+      </div>
+    </div>
+    <div class="second-view">
+      <div class="second-logo">
+        <h2>あなただけのカレンダーを</h2>
+        <ul>
+          <li>テキスト</li>
+          <li>テキスト</li>
+          <li>テキスト</li>
+        </ul>
+      </div>
+      <div class="second-image">
+        <%= image_tag "many-clocks.png" %>
+      </div>
+    </div>
+    <div class="third-view">
+      <h2>最高の<span>Experience</span>を</h2>
+      <p>さあ、始めよう</p>
+      <%= link_to '新規登録', new_user_registration_path, class: "first-sign-up" %>
+    </div>
+
+    <% end %>
+  </main>
+  <%= render "shared/footer" %>
+</body>

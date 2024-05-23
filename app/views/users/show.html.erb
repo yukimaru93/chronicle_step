@@ -1,0 +1,14 @@
+<body>
+  <%= render "shared/header" %>
+  <main>
+    <div class="main-visual">
+      <div id="calendar">
+        <h2 class="now-time"><%= @year_time %>年 <%= @month_time %>月</h2>
+        <div id="calendar-data"></div>
+      </div>
+    </div>
+  </main>
+  <%= render "shared/footer" %>
+  <meta name="csrf-token" content="<%= form_authenticity_token %>">
+  <%= javascript_include_tag 'calendar', crossorigin: 'anonymous' %>
+</body>

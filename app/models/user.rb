@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :name
-    validates :nickname
+    validates :nickname, uniqueness: true
   end
 
   has_many :calendars

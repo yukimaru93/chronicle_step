@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_22_182554) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_22_200611) do
   create_table "calendars", charset: "utf8mb4", force: :cascade do |t|
     t.text "content", null: false
     t.date "date", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_182554) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["nickname"], name: "index_users_on_nickname", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

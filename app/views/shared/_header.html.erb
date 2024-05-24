@@ -3,7 +3,7 @@
     <ul class='lists-right'>
       <% if user_signed_in? %>
       <li><%= link_to current_user.nickname, user_path(current_user.id), class: "user-nickname"%> </li> 
-      <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo: false }, class: "logout" %></li>
+      <li><%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete}, class: "logout"%></li>
       
  
       <% else %>

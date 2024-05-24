@@ -15,6 +15,7 @@
     font-family: 'Sacramento', cursive;
 }
 
+
 .top-content p {
     font-size: 60px;
     margin-bottom: 50px;
@@ -25,6 +26,20 @@
     -webkit-text-fill-color: transparent;
     font-weight: 600;
     font-family: 'Sacramento', cursive;
+}
+
+@media screen and (max-width:500px) {
+.top-content {
+    height: 600px;
+}
+
+.top-content .times {
+    font-size: 30px;
+}
+
+.top-content p {
+    font-size: 30px;
+}
 }
 
 .my-page-btn {
@@ -143,4 +158,25 @@
     color: #000000;
     padding: 20px 30px;
     opacity: 0.8;
+}
+
+
+@media screen and (max-width:500px) {
+.first-logo h2,.second-logo h2 {
+    font-size: 4vw;
+    padding-left: 15px;
+}
+
+.first-view,.second-view,.third-view{
+    height:330px;
+}
+
+.second-image{
+    padding-left: 20px;
+    margin-top: 50px;
+}
+
+.third-view{
+    font-size: 30px;
+}
 }

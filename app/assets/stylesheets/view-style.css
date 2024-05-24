@@ -8,6 +8,7 @@
 th {
     border: 1px solid black;
     border-bottom: 5px double black;
+    background-color: #CCCC66;
 }
 
 #calendar table {
@@ -86,4 +87,27 @@ form h3 {
     box-shadow: none;
     position: relative;
     top: 3px;
+}
+
+
+@media screen and (max-width:500px) {
+
+.user-page{
+    height: 1000px;
+}
+
+.now-time {
+    position: absolute;
+    top: 130px;
+    left: 30px;
+    font-size: 30px;
+}
+
+#calendar table{
+    position: absolute;
+    top: 180px;
+    left: 10px;
+    width: 95%;
+}
+
 }

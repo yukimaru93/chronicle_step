@@ -4,7 +4,7 @@
         <div class="top-page">
             <%# <video src="/aseets/videos/video.mp4" autoplay muted loop class="main-video"></video> %>
             <%= video_tag "/videos/video.mp4", autoplay: :true, loop: :true, muted: :true, class:"main-video" %>
-            <%= form_with model: @user, url: user_registration_path, class: "signup-form", local: true do |f| %>
+            <%= form_with model: @user, url: user_registration_path, class: "sign-up-form", local: true do |f| %>
 
                 <%= render "shared/error_messages", model: f.object %>
 

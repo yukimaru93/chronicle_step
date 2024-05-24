@@ -45,6 +45,14 @@ header {
     color:aliceblue;
 }
 
+
+@media screen and (max-width: 500px) {
+.header-logo {
+    font-size: 40px;
+    margin-left: 20px;
+}
+}
+
 main {
     width: 100vw;
 }
@@ -60,14 +68,24 @@ main {
     opacity: 0.95;
 }
 
-.top-page .signup-form {
+.come-back {
+    position: absolute;
+    top: 180px;
+    left: 40px;
+    font-size: 60px;
+    font-weight: bold;
+    font-family: 'Sacramento', cursive;
+    color: aliceblue;
+}
+
+.top-page .sign-up-form {
     position: absolute;
     top: 130px;
     right: 60px;
     padding: 40px 30px;
 }
 
-.signup-form {
+.sign-up-form {
     background-color: #3f3f3f;
     opacity: 0.9;
     width: 350px;
@@ -75,13 +93,13 @@ main {
     border-radius: 10px;
 }
 
-.signup-form h2 {
+.sign-up-form h2 {
     font-size: 45px;
     font-family: 'Sawarabi Mincho', sans-serif;
     margin-bottom: 10px;
 }
 
-.signup-form label {
+.sign-up-form label {
     font-family: 'Sawarabi Mincho', sans-serif;
 }
 
@@ -92,6 +110,42 @@ main {
     font-family: 'Sawarabi Mincho', sans-serif;
     margin-top: 20px;
     cursor:pointer;
+}
+
+@media screen and (max-width:500px) {
+.main-video{
+    height: 800px;
+}
+
+.sign-up-form{
+    width:60%;
+}
+
+.top-page .sign-up-form {
+    position: absolute;
+    top: 150px;
+    right: 60px;
+    padding: 20px 30px;
+}
+
+.top-page .sign-in-form {
+    position: absolute;
+    top: 280px;
+    right: 60px;
+    padding: 20px 30px;
+}
+
+.come-back {
+    font-size: 38px;
+    position: absolute;
+    top: 150px;
+    left: 20px;
+}
+
+.sign-up-form h2{
+    font-size: 32px;
+}
+
 }
 
 footer {

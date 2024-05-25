@@ -21,9 +21,9 @@ export const CalendarView = (props) => {
           {calendarData.map((week, index) => (
             <tr key={index}>
               {week.map((day, dayIndex) => (
-                <Std key={dayIndex} onClick={() => onClickDate(day.date)}>
+                <Std key={dayIndex} onClick={() => onClickDate(day.year,day.month,day.date)}>
                   {day.date}
-                  <Sp>{getEventForDate(day.date)}</Sp>
+                  <Sp>{getEventForDate(day.year,day.month,day.date)}</Sp>
                 </Std>
               ))}
             </tr>

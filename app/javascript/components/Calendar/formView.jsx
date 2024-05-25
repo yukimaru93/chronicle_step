@@ -8,7 +8,7 @@ export const FormView = (props) => {
         <div>
           <div>
             <SForm onSubmit={submitPlan}>
-              <h3> {selectCalendarData} 日の予定を追加</h3>
+              <h3> {selectCalendarData.month}月{selectCalendarData.date} 日の予定を追加</h3>
               <textarea
                 type="text"
                 name="content"

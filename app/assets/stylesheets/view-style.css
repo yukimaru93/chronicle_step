@@ -30,15 +30,7 @@ th {
 }
 
 
-.now-time {
-    position: absolute;
-    top: 130px;
-    left: 70px;
-    font-size: 40px;
-    color: aliceblue;
-    font-family: 'Sacramento', cursive;
-}
-
+/* コンポーネントへ移動 */
 
 
 .close-form {
@@ -96,7 +88,7 @@ form h3 {
     height: 1000px;
 }
 
-.now-time {
+#calendar h2 {
     position: absolute;
     top: 130px;
     left: 30px;

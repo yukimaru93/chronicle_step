@@ -56,32 +56,32 @@ class Push
                 if t == 0
                     if last_month_last == 6
                         num = i + 1
-                        week.push({date:num})
+                        week.push({year:@year,month:@month,date:num})
                     else
                         num = last_month_last_day - last_month_last + i
                         if num > last_month_last_day
                             num = num - last_month_last_day
-                            week.push({date:num})
+                            week.push({year:@year,month:@month,date:num})
                         else
-                            week.push({date:num})
+                            week.push({year:@year,month:last_month,date:""})
                         end
                     end
                 elsif (t + 1) == weeks
                     if (t + 1) == 4
-                        week.push({date:end_week_first_day})
+                        week.push({year:@year,month:@month,date:end_week_first_day})
                         end_week_first_day += 1
                     else
                         num = end_week_first_day + i
                         if num > this_month_last_day
                             num = num - this_month_last_day
-                            week.push({date:num})
+                            week.push({year:@year,month:next_month,date:""})
                         else
-                            week.push({date:num})
+                            week.push({year:@year,month:@month,date:num})
                         end
                     end        
                 else
                     num = next_week_first_day + (7 * (t - 1)) + i
-                    week.push({date:num})
+                    week.push({year:@year,month:@month,date:num})
                 end
             end
             calendar_array << week

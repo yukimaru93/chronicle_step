@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'; 
-import styled from 'styled-components';
 import { CalendarView } from './calendarView';
 import { FormView } from './formView';
 import { ChangeCalendar } from './changeCalendar';
+import { CalendarYearMonth } from './calendarYearMonth';
 
 const ReactCalendars = () => {
   const [calendarData, setCalendarData] = useState([]);
@@ -103,7 +103,8 @@ const ReactCalendars = () => {
 
   return (
     <div>
-      <SH2>{monthYearData.year}年{monthYearData.month}月</SH2>
+      <CalendarYearMonth monthYearData={monthYearData} />
+      {/*コンポーネントの分離を実施5/26*/}
       <ChangeCalendar changeLastMonth={changeLastMonth} changeNextMonth={changeNextMonth} />
       {/*コンポーネントの分離を実施5/24*/}
       <div>
@@ -119,14 +120,6 @@ const ReactCalendars = () => {
 };
 
 
-const SH2 = styled.h2`
-  position: absolute;
-  top: 130px;
-  left: 70px;
-  font-size: 40px;
-  color: aliceblue;
-  font-family: 'Sacramento', cursive;
-`
-
+/* cssをコンポーネントへ移動（変更に基づきimportを一部編集） */
 
 export default ReactCalendars;

@@ -14,15 +14,7 @@ class CalendarsController < ApplicationController
     year = Time.now.year if year == 0
     month = Time.now.month if month == 0
 
-    # Push クラスを使ってデータを生成
-    push = Push.new(year, month)
-    calendar_data = push.array_pass
-    
-
-    events = current_user.calendars.where(date: Date.new(year, month, 1)..Date.new(year, month, -1))
-    event_data = events.map { |event| { year: event.date.year ,month: event.date.month ,date: event.date.day, content: event.content } }
-
-    render json: { calendar: calendar_data, events: event_data }
+    render_calendar(year,month)
   end
 
   def save_content
@@ -30,7 +22,6 @@ class CalendarsController < ApplicationController
     month = params[:event][:month].to_i
     day = params[:event][:date].to_i
 
-    
     date = Date.new(year, month, day)
     
     calendar = current_user.calendars.new(
@@ -45,6 +36,28 @@ class CalendarsController < ApplicationController
     end
   end
 
+  def delete_content
+    year = params[:event][:year].to_i
+    month = params[:event][:month].to_i
+    day = params[:event][:date].to_i
+
+    calendars = current_user.calendars.where(date: Date.new(year, month, day))
+    
+    errors = []
+
+    calendars.each do |calendar|
+      unless calendar.destroy
+        errors << calendar.errors.full_messages
+      end
+    end
+
+    if errors.empty?
+      render json: { status: "success", message: "All content deleted successfully." }, status: :ok
+    else
+      render json: { status: "error", errors: errors.flatten }, status: :unprocessable_entity
+    end
+  end
+
   def next_calendar_data
      # 現在の年月を取得してカレンダーデータを生成 ⇒ 送られてきたパラメータに応じて年月を取得へ変更5/25
     year = params[:year].to_i
@@ -55,14 +68,7 @@ class CalendarsController < ApplicationController
       year = year + 1
     end     
  
-     # Push クラスを使ってデータを生成
-    push = Push.new(year, month)
-    calendar_data = push.array_pass
-     
-    events = current_user.calendars.where(date: Date.new(year, month, 1)..Date.new(year, month, -1))
-    event_data = events.map { |event| { date: event.date.day, content: event.content } }
- 
-    render json: { calendar: calendar_data, events: event_data }
+    render_calendar(year,month)
   end
 
   def last_calendar_data
@@ -75,19 +81,22 @@ class CalendarsController < ApplicationController
       year = year - 1
     end     
  
-     # Push クラスを使ってデータを生成
-    push = Push.new(year, month)
-    calendar_data = push.array_pass
-     
-    events = current_user.calendars.where(date: Date.new(year, month, 1)..Date.new(year, month, -1))
-    event_data = events.map { |event| { date: event.date.day, content: event.content } }
- 
-    render json: { calendar: calendar_data, events: event_data }
+    render_calendar(year,month)
   end
 
   private
 
   def event_params
     params.require(:event).permit(:date, :content).merge(user_id: current_user.id)
+  end
+
+  def render_calendar(year,month)
+    push = Push.new(year, month)
+    calendar_data = push.array_pass
+     
+    events = current_user.calendars.where(date: Date.new(year, month, 1)..Date.new(year, month, -1))
+    event_data = events.map { |event| { year: event.date.year, month: event.date.month, date: event.date.day, content: event.content } }
+ 
+    render json: { calendar: calendar_data, events: event_data }
   end
 end

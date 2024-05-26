@@ -81,8 +81,6 @@ const ReactCalendars = () => {
       newMonth = 1
       newYear = newYear + 1
     };
-
-
     setMonthYearData({year: newYear, month: newMonth});
     fetchCalendarData(newYear, newMonth);
   };
@@ -94,11 +92,29 @@ const ReactCalendars = () => {
       newMonth = 12
       newYear = newYear - 1
     };
-
-
     setMonthYearData({year: newYear, month: newMonth});
     fetchCalendarData(newYear, newMonth);
   }
+
+  //登録データの削除機能の実装5/26
+  const clearForm = (event) => {
+    event.preventDefault();
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    axios.post("/calendars/delete_content", { event: formData }, {
+      headers: {
+        'X-CSRF-Token': csrfToken
+      }
+    })
+      .then(response => {
+        console.log('Event deleted:', response.data);
+        setFormIndex(false);
+        fetchCalendarData(monthYearData.year, monthYearData.month);
+      })
+      .catch(error => {
+        console.error("Error deleting event", error);
+      });
+  }
+
 //cssのコンポーネント分離を実施5/21  
 
   return (
@@ -111,7 +127,7 @@ const ReactCalendars = () => {
         <CalendarView calendarData={calendarData} onClickDate={onClickDate} getEventForDate={getEventForDate} />
         {/* コンポーネントの分離を実施 5/21*/}
         {formIndex && (
-          <FormView selectCalendarData={selectCalendarData} submitPlan={submitPlan} formData={formData} enterContent={enterContent} closeForm={closeForm} />
+          <FormView selectCalendarData={selectCalendarData} submitPlan={submitPlan} formData={formData} enterContent={enterContent} closeForm={closeForm} clearForm={clearForm} />
           /* コンポーネントの分離を実施 5/21*/
         )}
       </div>

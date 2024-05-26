@@ -46,34 +46,11 @@ th {
 
 form h3 {
     font-size: 24px;
-    margin: 0 auto;
+    font-family: 'Sacramento', cursive;
     background: linear-gradient(transparent 70%, #CCCC66 70%);
-    width: 220px;
 }
 
-.plan-textarea {
-    display: inline-block;
-    width: 90%;
-    height: 150px;
-    box-sizing: border-box;
-    padding: 10px;
-    border-radius: 10px;
-    line-height: 1.5em;
-    margin: 10px 0 10px 0;
-}
-
-.plan-save {
-    display: block;
-    margin: 0 auto;
-    width: 45%;
-    height: 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: 1px solid black;
-    box-shadow: 0 3px #808080;
-    letter-spacing: 10px;
-    font-size: 18px;
-}
+/*コンポーネントへ移動5/26*/
 
 .plan-save:active {
     box-shadow: none;
@@ -100,6 +77,18 @@ form h3 {
     top: 180px;
     left: 10px;
     width: 95%;
+}
+
+#calendar-data form{
+    width: 80%;
+    height: 50%;
+    position: fixed;
+    top: 150px;
+    left: 30px;
+}
+
+#calendar-data form h3 {
+    font-size: 16px;
 }
 
 }

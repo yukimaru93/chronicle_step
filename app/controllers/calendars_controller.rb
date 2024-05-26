@@ -21,18 +21,27 @@ class CalendarsController < ApplicationController
     year = params[:event][:year].to_i
     month = params[:event][:month].to_i
     day = params[:event][:date].to_i
+    content = params[:event][:content]
 
     date = Date.new(year, month, day)
     
-    calendar = current_user.calendars.new(
-      date: date,
-      content: params[:event][:content]
-    )
-
-    if calendar.save
-      render json: { status: "success", message: "Content saved successfully." }, status: :ok
+    if current_user.calendars.find_by(date: date).present?
+      calendar = current_user.calendars.find_by(date: date)
+      if calendar.update(content: content)
+        render json: { status: "success", message: "Content saved successfully." }, status: :ok
+      else
+        render json: { status: "error", errors: calendar.errors.full_messages }, status: :unprocessable_entity
+      end
     else
-      render json: { status: "error", errors: calendar.errors.full_messages }, status: :unprocessable_entity
+      calendar = current_user.calendars.new(
+        date: date,
+        content: params[:event][:content]
+      )
+      if calendar.save
+        render json: { status: "success", message: "Content saved successfully." }, status: :ok
+      else
+        render json: { status: "error", errors: calendar.errors.full_messages }, status: :unprocessable_entity
+      end
     end
   end
 

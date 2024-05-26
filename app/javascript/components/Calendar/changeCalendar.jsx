@@ -17,4 +17,9 @@ const SDiv = styled.div`
     position:absolute;
     top:150px;
     left:300px;
+    @media screen and (max-width:500px){
+        position:absolute;
+        top:140px;
+        left:190px;
+    }
 `;

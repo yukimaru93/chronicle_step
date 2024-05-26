@@ -44,8 +44,12 @@ const Std = styled.td`
 `;
 
 const Sp = styled.p`
-  overflow: hidden;
-  text-overflow: ellipsis;
+  height:70%;
+  overflow: auto;
+  white-space: pre-wrap;
   font-size: calc(12px + 0.5vw);
   line-height: 1.2;
+  @media screen and (max-width:500px){
+    font-size:8px;
+  }
 `;

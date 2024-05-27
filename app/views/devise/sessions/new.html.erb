@@ -7,9 +7,9 @@
             <h2 class="come-back">おかえりなさいBOSS</h2>
             <%= form_with model: @user, url: user_session_path, class: "sign-up-form sign-in-form", local: true do |f| %>
                 <h2>Sign in</h2>
-                <%= f.label :nickname,"●nicknameを入力" %>
+                <%= f.label :nickname,"●ニックネームを入力" %>
                 <%= f.text_area :nickname, class:"input-default", maxlength:"40" %>
-                <%= f.label :password,"●passwordを入力(半角６字以上)" %>
+                <%= f.label :password,"●パスワードを入力(半角６字以上)" %>
                 <%= f.password_field :password, class:"input-default", placeholder:"6文字以上の半角英数字" %>
                 <%= f.submit "Enter" ,id:"submit-btn" %>
             <% end %>

@@ -4,12 +4,16 @@ import { CalendarView } from './calendarView';
 import { FormView } from './formView';
 import { ChangeCalendar } from './changeCalendar';
 import { CalendarYearMonth } from './calendarYearMonth';
+import { ChangeIndex } from './changeIndex';
+import { IndexPlanData } from './indexPlanData';
 
 const ReactCalendars = () => {
   const [calendarData, setCalendarData] = useState([]);
   const [eventData, setEventData] = useState([]);
+  const [fullEventData, setFullEventData] = useState([]);
   const [selectCalendarData, setSelectCalendarData] = useState(null);
   const [formIndex, setFormIndex] = useState(false);
+  const [planIndex, setPlanIndex] = useState(true);
   const [formData, setFormData] = useState({ year: "", month: "", date: "", content: "", calendar_id: 1 });
   const [monthYearData, setMonthYearData] = useState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1});
 
@@ -28,6 +32,7 @@ const ReactCalendars = () => {
 
   useEffect(() => {
     fetchCalendarData();
+    indexPlan();
   }, []);
 
   const onClickDate = (year, month, date) => {
@@ -59,6 +64,7 @@ const ReactCalendars = () => {
         console.log('Event saved:', response.data);
         setFormIndex(false);
         fetchCalendarData(monthYearData.year, monthYearData.month);
+        indexPlan();
       })
       .catch(error => {
         console.error("Error saving event", error);
@@ -109,11 +115,34 @@ const ReactCalendars = () => {
         console.log('Event deleted:', response.data);
         setFormIndex(false);
         fetchCalendarData(monthYearData.year, monthYearData.month);
+        indexPlan();
       })
       .catch(error => {
         console.error("Error deleting event", error);
       });
   }
+
+  //最新の予定の表示・非表示機能の実装5/27
+  const planIndexChange = () => {
+    if (planIndex){
+      setPlanIndex(false);
+    }else{
+      setPlanIndex(true);
+    };
+  }
+
+  const indexPlan = () => {
+    axios.get("/calendars/full_plan")
+      .then(response => {
+        setFullEventData(response.data.events)
+      })
+      .catch(error => {
+        console.error("Error fetching event data", error);
+      })
+  }
+
+
+
 
 //cssのコンポーネント分離を実施5/21  
 
@@ -123,6 +152,8 @@ const ReactCalendars = () => {
       {/*コンポーネントの分離を実施5/26*/}
       <ChangeCalendar changeLastMonth={changeLastMonth} changeNextMonth={changeNextMonth} />
       {/*コンポーネントの分離を実施5/24*/}
+      <ChangeIndex planIndexChange={planIndexChange} />
+      {/*コンポーネントの分離を実施5/27*/}
       <div>
         <CalendarView calendarData={calendarData} onClickDate={onClickDate} getEventForDate={getEventForDate} />
         {/* コンポーネントの分離を実施 5/21*/}
@@ -131,10 +162,13 @@ const ReactCalendars = () => {
           /* コンポーネントの分離を実施 5/21*/
         )}
       </div>
+      {planIndex && (
+        <IndexPlanData onClickDate={onClickDate} fullEventData={fullEventData} />
+        /*コンポーネントの分離を実施5/27*/
+      )}
     </div>
   );
 };
-
 
 /* cssをコンポーネントへ移動（変更に基づきimportを一部編集） */
 

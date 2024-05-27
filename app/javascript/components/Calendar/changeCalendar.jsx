@@ -6,11 +6,19 @@ export const ChangeCalendar = (props) => {
 
     return(
         <SDiv>
-            <button onClick={changeLastMonth}>先月へ</button>
-            <button onClick={changeNextMonth}>来月へ</button>
+            <SButton onClick={changeLastMonth}>先月へ</SButton>
+            <SButton onClick={changeNextMonth}>来月へ</SButton>
         </SDiv>
     )
 }
+
+const SButton = styled.button`
+    background: linear-gradient(to bottom right, #FFF9E6, #d0A900);
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right:10px;
+`
 
 
 const SDiv = styled.div`
@@ -19,7 +27,7 @@ const SDiv = styled.div`
     left:300px;
     @media screen and (max-width:500px){
         position:absolute;
-        top:140px;
-        left:190px;
+        top:120px;
+        left:230px;
     }
 `;

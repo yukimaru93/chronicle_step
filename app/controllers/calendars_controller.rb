@@ -17,6 +17,20 @@ class CalendarsController < ApplicationController
     render_calendar(year,month)
   end
 
+  def full_plan
+    today_year = Time.now.year
+    today_month = Time.now.month
+    today_day = Time.now.day
+
+    today_date = Date.new(today_year,today_month,today_day)
+
+    events = current_user.calendars.where("date >= ?",today_date)
+    event_data = events.map { |event| { year: event.date.year, month: event.date.month, date: event.date.day, content: event.content } }
+    new_events = event_data.sort_by{ |i| [i[:year], i[:month], i[:date]] }
+
+    render json: { events: new_events }
+  end
+
   def save_content
     year = params[:event][:year].to_i
     month = params[:event][:month].to_i

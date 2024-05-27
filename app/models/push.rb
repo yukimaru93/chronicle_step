@@ -11,6 +11,8 @@ class Push
     def count_week(year,month)
         if ( month == 2 ) && ( year % 4 == 0 )
             4
+        elsif ((this_month_last_day(year,month) == 30) && (this_month_first(year,month) == 6)) || ((this_month_last_day(year,month) == 31) && ((this_month_first(year,month) == 5)||(this_month_first(year,month) == 6)))
+            6
         else
             5
         end

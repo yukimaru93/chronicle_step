@@ -40,7 +40,7 @@ const Std = styled.td`
     padding: 5px 0 0 5px;
     cursor: pointer;
     width: calc(100% / 7);
-    height: 20%;
+    height: calc(100% / 6);
 `;
 
 const Sp = styled.p`

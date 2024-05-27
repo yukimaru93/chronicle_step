@@ -4,11 +4,13 @@ import { CalendarView } from './calendarView';
 import { FormView } from './formView';
 import { ChangeCalendar } from './changeCalendar';
 import { CalendarYearMonth } from './calendarYearMonth';
-import { styled } from 'styled-components';
+import { ChangeIndex } from './changeIndex';
+import { IndexPlanData } from './indexPlanData';
 
 const ReactCalendars = () => {
   const [calendarData, setCalendarData] = useState([]);
   const [eventData, setEventData] = useState([]);
+  const [fullEventData, setFullEventData] = useState([]);
   const [selectCalendarData, setSelectCalendarData] = useState(null);
   const [formIndex, setFormIndex] = useState(false);
   const [planIndex, setPlanIndex] = useState(true);
@@ -30,6 +32,7 @@ const ReactCalendars = () => {
 
   useEffect(() => {
     fetchCalendarData();
+    indexPlan();
   }, []);
 
   const onClickDate = (year, month, date) => {
@@ -61,6 +64,7 @@ const ReactCalendars = () => {
         console.log('Event saved:', response.data);
         setFormIndex(false);
         fetchCalendarData(monthYearData.year, monthYearData.month);
+        indexPlan();
       })
       .catch(error => {
         console.error("Error saving event", error);
@@ -111,6 +115,7 @@ const ReactCalendars = () => {
         console.log('Event deleted:', response.data);
         setFormIndex(false);
         fetchCalendarData(monthYearData.year, monthYearData.month);
+        indexPlan();
       })
       .catch(error => {
         console.error("Error deleting event", error);
@@ -126,6 +131,17 @@ const ReactCalendars = () => {
     };
   }
 
+  const indexPlan = () => {
+    axios.get("/calendars/full_plan")
+      .then(response => {
+        setFullEventData(response.data.events)
+      })
+      .catch(error => {
+        console.error("Error fetching event data", error);
+      })
+  }
+
+
 
 
 //cssのコンポーネント分離を実施5/21  
@@ -136,10 +152,8 @@ const ReactCalendars = () => {
       {/*コンポーネントの分離を実施5/26*/}
       <ChangeCalendar changeLastMonth={changeLastMonth} changeNextMonth={changeNextMonth} />
       {/*コンポーネントの分離を実施5/24*/}
-      <SDivChange>
-        <button onClick={planIndexChange}>最新の予定を表示</button>
-        <button onClick={planIndexChange}>最新の予定を非表示</button>
-      </SDivChange>
+      <ChangeIndex planIndexChange={planIndexChange} />
+      {/*コンポーネントの分離を実施5/27*/}
       <div>
         <CalendarView calendarData={calendarData} onClickDate={onClickDate} getEventForDate={getEventForDate} />
         {/* コンポーネントの分離を実施 5/21*/}
@@ -149,35 +163,12 @@ const ReactCalendars = () => {
         )}
       </div>
       {planIndex && (
-        <SDiv></SDiv>
+        <IndexPlanData onClickDate={onClickDate} fullEventData={fullEventData} />
+        /*コンポーネントの分離を実施5/27*/
       )}
     </div>
   );
 };
-
-
-const SDivChange = styled.div`
-    position:absolute;
-    top:150px;
-    right:150px;
-    @media screen and (max-width:500px){
-        position:absolute;
-        top:140px;
-        right:10px;
-    }
-`;
-
-const SDiv = styled.div`
-  width:100vw;
-  background-color:#000000;
-  height: 40%;
-  position: fixed;
-  bottom:0;
-  overflow: auto;
-  z-index:30;
-  opacity: 0.8;
-`
-
 
 /* cssをコンポーネントへ移動（変更に基づきimportを一部編集） */
 

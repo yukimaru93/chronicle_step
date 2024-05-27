@@ -99,7 +99,7 @@ const SClearButton = styled.button`
 `
 
 const SForm = styled.form`
-  z-index: 10;
+  z-index: 50;
   width: 60%;
   height: 50%;
   position: fixed;

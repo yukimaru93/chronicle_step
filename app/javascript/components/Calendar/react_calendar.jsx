@@ -4,12 +4,14 @@ import { CalendarView } from './calendarView';
 import { FormView } from './formView';
 import { ChangeCalendar } from './changeCalendar';
 import { CalendarYearMonth } from './calendarYearMonth';
+import { styled } from 'styled-components';
 
 const ReactCalendars = () => {
   const [calendarData, setCalendarData] = useState([]);
   const [eventData, setEventData] = useState([]);
   const [selectCalendarData, setSelectCalendarData] = useState(null);
   const [formIndex, setFormIndex] = useState(false);
+  const [planIndex, setPlanIndex] = useState(true);
   const [formData, setFormData] = useState({ year: "", month: "", date: "", content: "", calendar_id: 1 });
   const [monthYearData, setMonthYearData] = useState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1});
 
@@ -115,6 +117,17 @@ const ReactCalendars = () => {
       });
   }
 
+  //最新の予定の表示・非表示機能の実装5/27
+  const planIndexChange = () => {
+    if (planIndex){
+      setPlanIndex(false);
+    }else{
+      setPlanIndex(true);
+    };
+  }
+
+
+
 //cssのコンポーネント分離を実施5/21  
 
   return (
@@ -123,6 +136,10 @@ const ReactCalendars = () => {
       {/*コンポーネントの分離を実施5/26*/}
       <ChangeCalendar changeLastMonth={changeLastMonth} changeNextMonth={changeNextMonth} />
       {/*コンポーネントの分離を実施5/24*/}
+      <SDivChange>
+        <button onClick={planIndexChange}>最新の予定を表示</button>
+        <button onClick={planIndexChange}>最新の予定を非表示</button>
+      </SDivChange>
       <div>
         <CalendarView calendarData={calendarData} onClickDate={onClickDate} getEventForDate={getEventForDate} />
         {/* コンポーネントの分離を実施 5/21*/}
@@ -131,9 +148,35 @@ const ReactCalendars = () => {
           /* コンポーネントの分離を実施 5/21*/
         )}
       </div>
+      {planIndex && (
+        <SDiv></SDiv>
+      )}
     </div>
   );
 };
+
+
+const SDivChange = styled.div`
+    position:absolute;
+    top:150px;
+    right:150px;
+    @media screen and (max-width:500px){
+        position:absolute;
+        top:140px;
+        right:10px;
+    }
+`;
+
+const SDiv = styled.div`
+  width:100vw;
+  background-color:#000000;
+  height: 40%;
+  position: fixed;
+  bottom:0;
+  overflow: auto;
+  z-index:30;
+  opacity: 0.8;
+`
 
 
 /* cssをコンポーネントへ移動（変更に基づきimportを一部編集） */

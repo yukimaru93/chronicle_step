@@ -16,7 +16,7 @@ const ReactCalendars = () => {
   const [planIndex, setPlanIndex] = useState(true);
   const [formData, setFormData] = useState({ year: "", month: "", date: "", content: "", calendar_id: 1 });
   const [monthYearData, setMonthYearData] = useState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1});
-
+  
   const fetchCalendarData = (year, month) => {
     axios.get("/calendars/calendar_data", {
       params: { year: year, month: month }

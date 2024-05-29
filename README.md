@@ -4,7 +4,7 @@
 ## calendars テーブル
 
 | Column              | Type       | Options                        |
-| ------------------- | ---------- | ------------------------------ |                  |
+| ------------------- | ---------- | ------------------------------ |
 | user                | references | null: false, foreign_key: true |
 | date                | date       | null: false |
 | content             | text       | null: false |

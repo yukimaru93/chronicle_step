@@ -12,8 +12,11 @@ http://52.198.221.75/
 
 # テスト用アカウント
 ID:friday
+
 PASS:4285
+
 nickname:yukimaru
+
 パスワード:6454yuki
 
 # 利用方法
@@ -71,17 +74,26 @@ https://github.com/yukimaru93/chronicle_step/assets/167279940/d6127e14-f65c-4126
 
 # 開発環境
 フロントエンド(Ruby,Javascript,React,HTML,CSS)
+
 ※RailsのESbuildを使用し、Reactを導入
+
 ※Reactのバージョンは18、React内のCSSはstyled-componentを使用
+
 バックエンド(RubyonRails)
+
 インフラ(AWS)
+
 テキストエディタ(VSCode)
+
 タスク管理(Github)
 
 # 工夫したポイント	
 スクール内で学習したRubyonRailsに加え、学習中に独学で習得をしていたReactを活用したコンポーネントの受け渡しをアプリケーションに組み込んだ。
+
 カレンダー自体は他のAPIを活用すればかなり簡単に作成ができるが、あえてReactでのデータの受け渡しにすることで自身でAPI構築まですることができた。
+
 作成途中より数名のテストユーザーに協力していただき、機能の追加実装案や修正箇所等を共有していただくことができた。実際ユーザーに活用していただくことで責任感ももってアプリケーション作成に臨めた。
+
 作成時には当初webpackerを使用していたが、Rails7との相性が悪く、アプリケーションをESbuildで再作成した。バージョンに対応して使う技術を変化させることにも力を入れた。
 
 # 改善点

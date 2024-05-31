@@ -163,7 +163,7 @@ const ReactCalendars = () => {
         )}
       </div>
       {planIndex && (
-        <IndexPlanData onClickDate={onClickDate} fullEventData={fullEventData} />
+        <IndexPlanData onClickDate={onClickDate} fullEventData={fullEventData} monthYearData={monthYearData} />
         /*コンポーネントの分離を実施5/27*/
       )}
     </div>

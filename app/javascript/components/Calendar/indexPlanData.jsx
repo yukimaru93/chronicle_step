@@ -4,18 +4,22 @@ import styled from 'styled-components';
 
 
 export const IndexPlanData = (props) => {
-    const {onClickDate, fullEventData} = props
+    const {onClickDate, fullEventData, monthYearData} = props
     const [active, setActive] = useState(false)
 
 
     return(
       <SWrapper $active={active} >
         <SDivButton onClick={() => setActive(!active)}>
-          {active ? '▲' : '▼'}
+          {active ? '▼' : '▲'}
         </SDivButton>
         <SDiv>
           {fullEventData.map((plan,index) => (
-            <SDivPlan key={index} onClick={() => onClickDate(plan.year,plan.month,plan.date)}>
+            <SDivPlan
+              key={index}
+              onClick={() => onClickDate(plan.year,plan.month,plan.date)}
+              currentDate={(monthYearData.year == plan.year)&&(monthYearData.month == plan.month)}  
+            >
               <SDivDate>
                 {plan.year}年 {plan.month}月 {plan.date}日
               </SDivDate>
@@ -26,7 +30,6 @@ export const IndexPlanData = (props) => {
           ))}
         </SDiv>
       </SWrapper>
-      
     )
 }
 
@@ -68,7 +71,7 @@ const SDivDate = styled.div`
 const SDivPlan = styled.div`
   width:96%;
   height:60px;
-  background-color:#ffffff;
+  background-color:${props => props.currentDate ? "#CCCC66" : "#ffffff" };
   color:#000000;
   margin: 10px 20px;
   overflow: auto;

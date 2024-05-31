@@ -15,9 +15,9 @@ ID:friday
 
 PASS:4285
 
-nickname:yukimaru
+nickname:test
 
-パスワード:6454yuki
+パスワード:123abc
 
 # 利用方法
 ## カレンダー作成

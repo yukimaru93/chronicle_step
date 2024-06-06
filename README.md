@@ -56,6 +56,20 @@ https://github.com/yukimaru93/chronicle_step/assets/167279940/d6127e14-f65c-4126
 
 - belongs_to :user
 
+## households テーブル
+
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| user                | references | null: false, foreign_key: true |
+| date                | date       | null: false |
+| item                | text       | null: false |
+| amount              | integer    | null: false |
+| purpose             | string     | null: false |
+| content             | text       | 
+ 
+### Association
+
+- belongs_to :user
 
 ## users テーブル
 

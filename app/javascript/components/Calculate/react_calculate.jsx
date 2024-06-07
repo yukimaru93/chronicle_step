@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 
 
@@ -8,12 +8,36 @@ const ReactCalculate = () => {
     const [paymentData, setPaymentData] = useState(0);
     const [calculateData, setCalculateData] = useState([]);
     const [formSpendingData, setFormSpendingData] = useState(false);
-    const [formDataInput, setFormDataInput] = useState({year: new Date().getFullYear(), month: new Date().getMonth() + 1, day: new Date().getDay(), item: "", amount: "", purpose: "", content: ""});
+    const [formDataInput, setFormDataInput] = useState({
+        year: new Date().getFullYear(),
+        month: new Date().getMonth() + 1,
+        day: new Date().getDate(),
+        item: "",
+        amount: "",
+        purpose: "",
+        content: ""
+    });
 
+    const fetchCalculateData = () => {
+        axios.get("/households/index_data")
+        .then(response => {
+            setCalculateData(response.data.event);
+            indexSpending(response.data.spending_data);
+        })
+        .catch(error => {
+            console.error("Error fetching calendar data:", error);
+        });
+    }
+
+    useEffect(() => {
+        fetchCalculateData()
+    ,[]});
+    
     //収入、収支の反映
     const indexIncome = (event) => {
-        setIncomeData(event.target)
-        setPaymentData(incomeData - spendingData)
+        const value = parseFloat(event.target.value) || 0;
+        setIncomeData(value);
+        setPaymentData(value - spendingData);
     };
 
     const indexSpending = (spend) => {
@@ -21,7 +45,8 @@ const ReactCalculate = () => {
         spend.map((amount) => (
             sum_data += amount
         ))
-        setSpendingData(sum_data)
+        setSpendingData(sum_data);
+        setPaymentData(incomeData - sum_data);
     }
 
     const setForm = () => {       
@@ -35,12 +60,16 @@ const ReactCalculate = () => {
 
     const submitForm = (event) => {
         event.preventDefault();
-        axios.post("/households/save_data", { event: formDataInput })
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        axios.post("/households/save_data", { event: formDataInput }, {
+        headers: {
+            'X-CSRF-Token': csrfToken
+        }
+        })
         .then(response => {
             console.log('Event saved:', response.data);
-            setFormIndex(false);
-            setCalculateData(response.data.event);
-            indexSpending(response.data.spending_data);
+            setFormSpendingData(false);
+            fetchCalculateData();
         })
         .catch(error => {
             console.error("Error saving event", error);
@@ -79,14 +108,14 @@ const ReactCalculate = () => {
                 <button onClick={setForm}>データの記録をする</button>
                 {formSpendingData && (
                     <form onSubmit={submitForm}>
-                        <label for="item">支出先</label>
-                        <input type="text" name="item" value={formDataInput.item} placeholder="何に使ったかを記入" onChange={enterFormData}/>
-                        <label for="amount">金額</label>
-                        <input type="number" name="amount" value={formDataInput.amount} placeholder="購入金額を記入" onChange={enterFormData}/>
-                        <label for="purpose">用途</label>
-                        <input type="text" name="purpose" value={formDataInput.purpose} placeholder="例：食費 家賃など" onChange={enterFormData}/>
-                        <label for="content">コメント</label>
-                        <input type="text" name="content" value={formDataInput.content} placeholder="購入日など、メモがあれば記述" onChange={enterFormData}/>
+                        <label htmlFor="item">支出先</label>
+                        <input type="text" id="item" name="item" value={formDataInput.item} placeholder="何に使ったかを記入" onChange={enterFormData}/>
+                        <label htmlFor="amount">金額</label>
+                        <input type="number" id="amount" name="amount" value={formDataInput.amount} placeholder="購入金額を記入" onChange={enterFormData}/>
+                        <label htmlFor="purpose">用途</label>
+                        <input type="text" id="purpose" name="purpose" value={formDataInput.purpose} placeholder="例：食費 家賃など" onChange={enterFormData}/>
+                        <label htmlFor="content">コメント</label>
+                        <input type="text" id="content" name="content" value={formDataInput.content} placeholder="購入日など、メモがあれば記述" onChange={enterFormData}/>
                         <button type="submit">データを記録する</button>
                     </form>
                 )}

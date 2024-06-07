@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
 
   post 'households/save_data', to: 'households#save_data'
+  get 'households/index_data', to: 'households#index_data'
 end

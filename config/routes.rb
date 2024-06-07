@@ -13,4 +13,6 @@ Rails.application.routes.draw do
       get 'show_calc'
     end
   end
+
+  post 'households/save_data', to: 'households#save_data'
 end

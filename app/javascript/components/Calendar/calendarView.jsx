@@ -5,7 +5,7 @@ export const CalendarView = (props) => {
     const {calendarData, onClickDate, getEventForDate} = props
 
     return (
-        <table>
+      <table>
         <thead>
           <tr>
             <th>日</th>

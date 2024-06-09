@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_22_200611) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_28_065628) do
   create_table "calendars", charset: "utf8mb4", force: :cascade do |t|
     t.text "content", null: false
     t.date "date", null: false
@@ -18,6 +18,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_200611) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_calendars_on_user_id"
+  end
+
+  create_table "households", charset: "utf8mb4", force: :cascade do |t|
+    t.date "date", null: false
+    t.text "item", null: false
+    t.integer "amount", null: false
+    t.string "purpose", null: false
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_households_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
@@ -36,4 +48,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_22_200611) do
   end
 
   add_foreign_key "calendars", "users"
+  add_foreign_key "households", "users"
 end

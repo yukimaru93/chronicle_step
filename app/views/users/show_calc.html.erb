@@ -1,0 +1,11 @@
+<body>
+  <%= render "shared/header" %>
+  <main>
+    <div class="calculate">
+        <div id="daily_calc"></div>
+    </div>
+  </main>
+  <%= render "shared/footer" %>
+  <meta name="csrf-token" content="<%= form_authenticity_token %>">
+  <%= javascript_include_tag 'calendar', crossorigin: 'anonymous' %>
+</body>

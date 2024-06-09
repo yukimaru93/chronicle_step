@@ -8,5 +8,13 @@ Rails.application.routes.draw do
   get 'calendars/next_calendar_data', to: 'calendars#next_calendar_data'
   get 'calendars/last_calendar_data', to: 'calendars#last_calendar_data'
   resources :calendars, only: [:index,:show]
-  resources :users, only: :show
+  resources :users, only: :show do
+    member do
+      get 'show_calc'
+    end
+  end
+
+  post 'households/save_data', to: 'households#save_data'
+  get 'households/index_data', to: 'households#index_data'
+  post 'households/delete_data', to: 'households#delete_data'  
 end

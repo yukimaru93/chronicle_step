@@ -12,6 +12,7 @@ class User < ApplicationRecord
   end
 
   has_many :calendars
+  has_many :households
 
   private
 

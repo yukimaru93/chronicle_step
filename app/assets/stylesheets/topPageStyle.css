@@ -42,6 +42,10 @@
 }
 }
 
+.btn-wrapper {
+    margin-bottom: 60px;
+}
+
 .my-page-btn {
     border: 5px solid #000000;
     border-radius: 10px;

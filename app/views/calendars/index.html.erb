@@ -7,7 +7,12 @@
       <h2>Hello Boss</h2>
       <h2 class="times" >本日は<%= @year_time %>年<%= @month_time %>月<%= @date_time %>日です。</h2>
       <p>すてきな１日を</p>
-      <%= link_to "マイページ", user_path(current_user.id), class: "my-page-btn"%>
+      <div class="btn-wrapper">
+        <%= link_to "マイページ", user_path(current_user.id), class: "my-page-btn"%>
+      </div>
+      <div class="btn-wrapper">
+        <%= link_to "家計簿ページ", show_calc_user_path(current_user.id), class: "my-page-btn"%>
+      </div>
     </div>
 
     <% else %>

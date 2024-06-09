@@ -1,7 +1,7 @@
 class HouseholdsController < ApplicationController
     def index_data
         events = current_user.households.all
-        event_data = events.map{|event| {date: event.date, item: event.item, amount: event.amount, purpose: event.purpose, content: event.content} }
+        event_data = events.map{|event| { id: event.id, date: event.date, item: event.item, amount: event.amount, purpose: event.purpose, content: event.content} }
         event_spending_data = events.map{|event| event.amount }
         render json: { event: event_data, spending_data: event_spending_data }
     end
@@ -27,9 +27,19 @@ class HouseholdsController < ApplicationController
 
         if household.save
             events = current_user.households.all
-            event_data = events.map{|event| {date: event.date, item: event.item, amount: event.amount, purpose: event.purpose, content: event.content} }
+            event_data = events.map{|event| { id: event.id, date: event.date, item: event.item, amount: event.amount, purpose: event.purpose, content: event.content} }
             event_spending_data = events.map{|event| event.amount }
             render json: { event: event_data, spending_data: event_spending_data, status: "success", message: "Household saved successfully." }, status: :ok
+        else
+            render json: { status: "error", errors: household.errors.full_messages }, status: :unprocessable_entity
+        end
+    end
+
+    def delete_data
+        household = current_user.households.find(params[:id])
+
+        if household.destroy
+            render json: { status: "success", message: "Household deleted successfully." }, status: :ok
         else
             render json: { status: "error", errors: household.errors.full_messages }, status: :unprocessable_entity
         end

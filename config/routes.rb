@@ -16,4 +16,5 @@ Rails.application.routes.draw do
 
   post 'households/save_data', to: 'households#save_data'
   get 'households/index_data', to: 'households#index_data'
+  post 'households/delete_data', to: 'households#delete_data'  
 end

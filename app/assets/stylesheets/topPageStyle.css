@@ -28,6 +28,21 @@
     font-family: 'Sacramento', cursive;
 }
 
+.design-image-first {
+    width:48%;
+    text-align: left;
+    margin-top:10px;
+    border-radius: 5px;
+}
+
+.design-image-second {
+    width:48%;
+    text-align: right;
+    margin-left: 280px;
+    border-radius: 5px;
+}
+
+
 @media screen and (max-width:500px) {
 .top-content {
     height: 600px;

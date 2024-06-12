@@ -20,9 +20,12 @@ const ReactCalculate = () => {
         purpose: "",
         content: ""
     });
+    const [monthYearData, setMonthYearData] = useState({ year: new Date().getFullYear(), month: new Date().getMonth() + 1});
 
-    const fetchCalculateData = () => {
-        axios.get("/households/index_data")
+    const fetchCalculateData = (year, month) => {
+        axios.get("/households/index_data", {
+            params: { year: year, month: month }
+        })
         .then(response => {
             setCalculateData(response.data.event);
             indexSpending(response.data.spending_data);
@@ -33,7 +36,7 @@ const ReactCalculate = () => {
     };
 
     useEffect(() => {
-        fetchCalculateData();
+        fetchCalculateData(monthYearData.year, monthYearData.month);
     }, []);
 
     // 収入、収支の反映
@@ -80,7 +83,16 @@ const ReactCalculate = () => {
         .then(response => {
             console.log('Event saved:', response.data);
             setFormSpendingData(false);
-            fetchCalculateData();
+            fetchCalculateData(monthYearData.year, monthYearData.month);
+            setFormDataInput({
+                year: new Date().getFullYear(),
+                month: new Date().getMonth() + 1,
+                day: new Date().getDate(),
+                item: "",
+                amount: "",
+                purpose: "",
+                content: ""
+            });
         })
         .catch(error => {
             console.error("Error saving event", error);
@@ -97,11 +109,33 @@ const ReactCalculate = () => {
         })
         .then(response => {
             console.log('Event deleted:', response.data);
-            fetchCalculateData();
+            fetchCalculateData(monthYearData.year, monthYearData.month);
         })
         .catch(error => {
             console.error("Error deleting event", error);
         });
+    }
+
+    const changeNextMonth = () => {
+        let newMonth = monthYearData.month + 1;
+        let newYear = monthYearData.year;
+        if (newMonth > 12){
+          newMonth = 1
+          newYear = newYear + 1
+        };
+        setMonthYearData({year: newYear, month: newMonth});
+        fetchCalculateData(newYear, newMonth);
+    };
+    
+    const changeLastMonth = () => {
+        let newMonth = monthYearData.month - 1;
+        let newYear = monthYearData.year;
+        if (newMonth < 1){
+          newMonth = 12
+          newYear = newYear - 1
+        };
+        setMonthYearData({year: newYear, month: newMonth});
+        fetchCalculateData(newYear, newMonth);
     }
 
 
@@ -114,6 +148,10 @@ const ReactCalculate = () => {
                     <SInput type="number" onChange={indexIncome}/>
                     <SIncomeButton onClick={saveIncome} >保存</SIncomeButton>
                 </SDivWrap>
+                <SChangeDiv>
+                    <SChangeButton onClick={changeLastMonth}>先月へ</SChangeButton>
+                    <SChangeButton onClick={changeNextMonth}>来月へ</SChangeButton>
+                </SChangeDiv>
                 <STable>
                     <SThead>
                         <tr>
@@ -191,6 +229,26 @@ const ReactCalculate = () => {
         </SDiv>
     )
 };
+
+const SChangeButton = styled.button`
+    background: linear-gradient(to bottom right, #FFF9E6, #d0A900);
+    color: #000000;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right:10px;
+`
+
+
+const SChangeDiv = styled.div`
+    position:absolute;
+    top:140px;
+    left:500px;
+    @media screen and (max-width:500px){
+        position:absolute;
+        top:105px;
+        left:230px;
+    }
+`;
 
 const SForm = styled.form`
     z-index: 50;

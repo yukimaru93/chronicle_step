@@ -1,6 +1,8 @@
 class HouseholdsController < ApplicationController
     def index_data
-        events = current_user.households.all
+        year = params[:year].to_i
+        month = params[:month].to_i
+        events = current_user.households.where(date: Date.new(year, month, 1)..Date.new(year, month, -1))
         event_data = events.map{|event| { id: event.id, date: event.date, item: event.item, amount: event.amount, purpose: event.purpose, content: event.content} }
         event_spending_data = events.map{|event| event.amount }
         render json: { event: event_data, spending_data: event_spending_data }

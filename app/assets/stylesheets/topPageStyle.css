@@ -36,14 +36,19 @@
 }
 
 .design-image-second {
-    width:48%;
+    width:65%;
     text-align: right;
-    margin-left: 280px;
+    margin-left: 200px;
     border-radius: 5px;
 }
 
 
 @media screen and (max-width:500px) {
+
+.design-image-second {
+    margin-left: 50px;
+}
+
 .top-content {
     height: 600px;
 }
@@ -187,7 +192,7 @@
 }
 
 .first-view,.second-view,.third-view{
-    height:330px;
+    height:280px;
 }
 
 .second-image{

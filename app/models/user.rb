@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   has_many :calendars
   has_many :households
+  has_many :to_dos
 
   private
 

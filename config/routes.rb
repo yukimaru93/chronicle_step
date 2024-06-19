@@ -11,10 +11,15 @@ Rails.application.routes.draw do
   resources :users, only: :show do
     member do
       get 'show_calc'
+      get 'show_toDo'
     end
   end
 
   post 'households/save_data', to: 'households#save_data'
   get 'households/index_data', to: 'households#index_data'
-  post 'households/delete_data', to: 'households#delete_data'  
+  post 'households/delete_data', to: 'households#delete_data'
+  
+  post 'to_dos/save_data', to: 'to_dos#save_data'
+  post 'to_dos/delete_data', to: 'to_dos#delete_data'
+  get 'to_dos/index_data', to: 'to_dos#index_data'
 end

@@ -13,6 +13,9 @@
       <div class="btn-wrapper">
         <%= link_to "家計簿ページ", show_calc_user_path(current_user.id), class: "my-page-btn"%>
       </div>
+      <div>
+        <%= link_to "to-doリスト", show_toDo_user_path(current_user.id), class: "my-page-btn"%>
+      </div>
     </div>
 
     <% else %>
@@ -55,5 +58,4 @@
 
     <% end %>
   </main>
-  <%= render "shared/footer" %>
 </body>

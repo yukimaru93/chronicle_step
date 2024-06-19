@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_28_065628) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_12_235147) do
   create_table "calendars", charset: "utf8mb4", force: :cascade do |t|
     t.text "content", null: false
     t.date "date", null: false
@@ -32,6 +32,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_28_065628) do
     t.index ["user_id"], name: "index_households_on_user_id"
   end
 
+  create_table "to_dos", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "rank", null: false
+    t.text "content", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_to_dos_on_user_id"
+  end
+
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "nickname", null: false
@@ -49,4 +58,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_28_065628) do
 
   add_foreign_key "calendars", "users"
   add_foreign_key "households", "users"
+  add_foreign_key "to_dos", "users"
 end

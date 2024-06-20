@@ -71,6 +71,18 @@ https://github.com/yukimaru93/chronicle_step/assets/167279940/d6127e14-f65c-4126
 
 - belongs_to :user
 
+## to_dos テーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| rank               | integer    | null: false                    |
+| content            | text       | null: false                    |
+| user               | references | null: false, foreign_key: true |   
+
+### Association
+
+- belongs_to :user
+
 ## users テーブル
 
 | Column             | Type    | Options     |

@@ -420,7 +420,6 @@ const SMainDiv = styled.div`
     overflow-y: scroll;
     margin-top: 20px;
     border: 1px solid black;
-
 `
 
 const SMainTable = styled.table`

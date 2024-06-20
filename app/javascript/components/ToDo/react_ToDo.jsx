@@ -137,7 +137,7 @@ const ReactToDo = () => {
                                 <STdButton onClick={() => clearData(event.id)}>削除</STdButton>
                             </STd>
                         </STr>
-                    )) : <tr><td> </td></tr>}
+                    )) : (<tr colSpan="3" ><td> </td></tr>)}
                     </STbody>
                 </SMainTable>
             </SMainDiv>
@@ -190,10 +190,11 @@ const STd = styled.td`
     }
 `
 
-const STdButton = styled.td`
+const STdButton = styled.button`
     width: 4em;
     border: 1px solid black;
     text-align: center;
+    border-radius: 4px;
     @media screen and (max-width:500px){
         font-size:10px;
     }
@@ -204,7 +205,10 @@ const STdButton = styled.td`
 
 const SDiv = styled.div`
     height: 800px;
-    padding:200px;    
+    padding:200px;
+    @media screen and (max-width:500px){
+        padding: 150px 40px;
+    }    
 `
 
 
@@ -276,6 +280,7 @@ const SButton = styled.button`
     font-size: 18px;
     background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
     margin-bottom: 30px;
+    margin-top:30px;
 `
 
 const SListButton = styled.button`
@@ -289,6 +294,10 @@ const SGoalDiv = styled.div`
     display: flex;
     align-items: center;
     margin-bottom: 40px;
+    @media screen and (max-width:500px){
+        display: contents;
+        margin-bottom: 15px;
+    }
 `
 
 const SGoalTextDiv = styled.div`
@@ -297,6 +306,11 @@ const SGoalTextDiv = styled.div`
     background: linear-gradient(to bottom right, #FFF9E6, #d0A900);
     border-radius: 4px;
     padding: 1px 10px;
+    @media screen and (max-width:500px){
+        margin-left: 0;
+        margin-bottom: 15px;
+        font-size: 30px;
+    }
 `
 
 export default ReactToDo;

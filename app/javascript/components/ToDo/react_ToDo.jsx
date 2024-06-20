@@ -94,20 +94,22 @@ const ReactToDo = () => {
 
     return(
         <SDiv>
-            <div>
-                <button onClick={goalSet}>今月の目標を設定</button>
-                { goalForm && (
-                    <div>
-                        <input type="text" onChange={indexGoal}/>
-                        <button onClick={saveGoal} >保存</button>
-                    </div>
-                ) }
+            <SGoalDiv>
                 <div>
-                    {goalData}
+                    <SButton onClick={goalSet}>今月の目標を設定</SButton>
+                    { goalForm && (
+                        <div>
+                            <input type="text" onChange={indexGoal}/>
+                            <button onClick={saveGoal} >保存</button>
+                        </div>
+                    ) }
                 </div>
-            </div>
+                <SGoalTextDiv>
+                    {goalData}
+                </SGoalTextDiv>
+            </SGoalDiv>
             <div>
-                <button onClick={listSet} >今日やるべきことをリストに追加</button>
+                <SListButton onClick={listSet} >今日やるべきことをリストに追加</SListButton>
                 { formView && (
                     <SForm onSubmit={submitForm}>
                         <SFormDiv>
@@ -124,25 +126,81 @@ const ReactToDo = () => {
                     </SForm>
                 ) }
             </div>
-            <div>
-                <table>
-                    <tbody>
+            <SMainDiv>
+                <SMainTable>
+                    <STbody>
                     {toDoData.length > 0 ? toDoData.map((event, index) => (
-                        <tr key={index}>
-                            <td>{event.rank}</td>
-                            <td>{event.content}</td>
-                            <td>
-                                <button onClick={() => clearData(event.id)}>削除</button>
-                            </td>
-                        </tr>
+                        <STr key={index}>
+                            <STdRank>{event.rank}</STdRank>
+                            <STd>{event.content}</STd>
+                            <STd>
+                                <STdButton onClick={() => clearData(event.id)}>削除</STdButton>
+                            </STd>
+                        </STr>
                     )) : <tr><td> </td></tr>}
-                    </tbody>
-                </table>
-            </div>
+                    </STbody>
+                </SMainTable>
+            </SMainDiv>
         </SDiv>
     )
 
 };
+
+const STbody = styled.tbody`
+    white-space: pre-wrap;
+`
+
+const SMainDiv = styled.div`
+    height: 300px;
+    overflow-y: scroll;
+    margin-top: 20px;
+    border: 1px solid black;
+`
+
+const SMainTable = styled.table`
+    width: 100%;
+    background-color: rgba(204, 204, 153, 0.8);
+
+`
+
+const STr = styled.tr`
+    height: 50px;
+`
+
+const STdRank = styled.td`
+    width: 10%;
+    border: 1px solid black;
+    text-align: right;
+    padding-right: 15px;
+    @media screen and (max-width:500px){
+        font-size:10px;
+        padding-right: 5px;
+    }
+`
+
+
+const STd = styled.td`
+    width: 80%;
+    border: 1px solid black;
+    text-align: left;
+    padding-left: 10px;
+    @media screen and (max-width:500px){
+        font-size:10px;
+        padding-right: 5px;
+    }
+`
+
+const STdButton = styled.td`
+    width: 4em;
+    border: 1px solid black;
+    text-align: center;
+    @media screen and (max-width:500px){
+        font-size:10px;
+    }
+`
+
+
+
 
 const SDiv = styled.div`
     height: 800px;
@@ -153,7 +211,7 @@ const SDiv = styled.div`
 const SForm = styled.form`
     z-index: 50;
     width: 50%;
-    height: 60%;
+    height: 40%;
     position: fixed;
     top: 150px;
     left: 150px;
@@ -211,5 +269,34 @@ const SFormDiv = styled.div`
     margin-bottom: 20px;
 `
 
+
+const SButton = styled.button`
+    width: 12em;
+    padding: 0.5em 1em;
+    font-size: 18px;
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+    margin-bottom: 30px;
+`
+
+const SListButton = styled.button`
+    width: 18em;
+    padding: 0.5em 1em;
+    font-size: 18px;
+    background: linear-gradient(45deg, #B67B03 0%, #DAAF08 45%, #FEE9A0 70%, #DAAF08 85%, #B67B03 90% 100%);
+`
+
+const SGoalDiv = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+`
+
+const SGoalTextDiv = styled.div`
+    margin-left: 30px;
+    font-size: 40px;
+    background: linear-gradient(to bottom right, #FFF9E6, #d0A900);
+    border-radius: 4px;
+    padding: 1px 10px;
+`
 
 export default ReactToDo;

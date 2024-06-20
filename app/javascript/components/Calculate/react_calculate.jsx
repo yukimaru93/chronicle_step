@@ -389,9 +389,6 @@ const STable = styled.table`
     margin: 10px 0 ;
 `
 
-const SThead = styled.thead`
-
-`
 
 const SSaveButton = styled.button`
     width:400px;
